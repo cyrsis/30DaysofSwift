@@ -14,11 +14,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var pauseBtn: UIButton!
     
     var Counter = 0.0
-    var Timer = NSTimer()
+    var Timer = Foundation.Timer()
     var IsPlaying = false
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     override func viewDidLoad() {
@@ -27,29 +27,29 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var timeLabel: UILabel!
-    @IBAction func resetButtonDidTouch(sender: AnyObject) {
+    @IBAction func resetButtonDidTouch(_ sender: AnyObject) {
         Timer.invalidate()
         IsPlaying = false
         Counter = 0
         timeLabel.text = String(Counter)
-        playBtn.enabled = true
-        pauseBtn.enabled = true
+        playBtn.isEnabled = true
+        pauseBtn.isEnabled = true
     }
     
-    @IBAction func playButtonDidTouch(sender: AnyObject) {
+    @IBAction func playButtonDidTouch(_ sender: AnyObject) {
         if(IsPlaying) {
             return
         }
-        playBtn.enabled = false
-        pauseBtn.enabled = true
-        Timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ViewController.UpdateTimer), userInfo: nil, repeats: true)
+        playBtn.isEnabled = false
+        pauseBtn.isEnabled = true
+        Timer = Foundation.Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.UpdateTimer), userInfo: nil, repeats: true)
         IsPlaying = true
     }
     
-    @IBAction func pauseButtonDidTouch(sender: AnyObject) {
+    @IBAction func pauseButtonDidTouch(_ sender: AnyObject) {
         
-        playBtn.enabled = true
-        pauseBtn.enabled = false
+        playBtn.isEnabled = true
+        pauseBtn.isEnabled = false
         Timer.invalidate()
         IsPlaying = false
         
